@@ -4,10 +4,8 @@ const Restaurant = require("./models");
 const port = 3000;
 
 //TODO: Create your GET Request Route Below: 
-app.get("/restaurants", async (req, res) => {
-    const rests = await Restaurant.findAll();
-    res.json(rests);
-})
+
+
 
 
 app.listen(port, () => {
