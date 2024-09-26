@@ -22,18 +22,28 @@ app.post('/restaurants', async (req, res) => {
     }
 });
 
-// app.put('/restaurants/:id', async (req, res) => {
-//     try{
-//         const id = req.params.id;
-//         const newerData = req.body;
-//         const data = await Restaurant.findByPk(id);
-//         const done = await Restaurant.update(newerData);
-//         res.json(data);
-//     } catch(err) {
-//         console.error(err);
-//     }
-// })
+app.put('/restaurants/:id', async (req, res) => {
+    try {
+        const thisId = req.params.id;
+        const newerData = req.body;
+        await Restaurant.update(newerData, {where: {id : thisId} });
+        const data = await Restaurant.findByPk(thisId);
+        res.json(data);
+    } catch(err) {
+        console.error(err);
+    }
+})
 
+app.delete('/restaurants/:id', async (req, res) => {    
+    try{
+        const data = await Restaurant.findByPk(req.params.id);
+        data.destroy()
+        res.json(data);
+        
+    } catch {
+        console.error("This is an error for app.delete.")
+    }
+});
 
 
 module.exports = app;
