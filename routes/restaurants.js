@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const Restaurant = require("../models/index")
 
-router.get("/restaurants", async (req, res) => {
+router.get("/", async (req, res) => {
     const rests = await Restaurant.findAll();
     res.json(rests);
 })
 
-router.get('/restaurants/:id', async(req, res) => {
+router.get('/:id', async(req, res) => {
     const id = req.params.id;
     const data = await Restaurant.findByPk(id);
     res.json(data);
